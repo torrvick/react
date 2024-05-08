@@ -1,0 +1,21 @@
+.App {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-content {
+  animation: introAnim 5s ease-in-out;
+
+}
+
+@keyframes introAnim {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
