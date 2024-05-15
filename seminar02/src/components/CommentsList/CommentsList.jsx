@@ -27,12 +27,16 @@ const CommentList = () => {
 		setNewComment('');
 	};
 
-	const removeComment = React.useCallback(
-		(id) => {
-			setComments(comments.filter((comment) => comment.id !== id));
-		},
-		[comments]
-	);
+	// const removeComment = React.useCallback(
+	// 	(id) => {
+	// 		setComments(comments.filter((comment) => comment.id !== id));
+	// 	},
+	// 	[comments]
+	// );
+
+	const removeComment = React.useCallback((id) => {
+		setComments((currentComments) => currentComments.filter((comment) => comment.id !== id));
+	}, []);
 
 	return (
 		<div className="comments">
