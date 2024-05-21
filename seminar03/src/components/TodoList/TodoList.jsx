@@ -59,7 +59,7 @@ const TodoList = () => {
 	const allTasks = [...uncompletedTasks, ...completedTasks];
 
 	return (
-		<List sx={{ width: '100%', maxWidth: 400, fontFamily: 'Arial, sans-serif' }}>
+		<List sx={{ width: '100%', maxWidth: 400 }}>
 			{allTasks.map((task) => (
 				<ListItem
 					key={task.id}
@@ -88,7 +88,7 @@ const TodoList = () => {
 			<ListItem
 				secondaryAction={
 					<IconButton edge="end" aria-label="delete" sx={{ padding: 0 }} onClick={addTask}>
-						<AddCircleOutlineIcon sx={{ color: '#4caf50', fontSize: 30 }} />
+						<AddCircleOutlineIcon sx={{ color: newTask ? '#4caf50' : '#ccc', fontSize: 30 }} />
 					</IconButton>
 				}
 				sx={{ mt: 2, paddingLeft: 0 }}
