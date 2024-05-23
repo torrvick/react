@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import AboutPage from './components/AboutPage';
