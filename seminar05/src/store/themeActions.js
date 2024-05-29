@@ -6,16 +6,10 @@ const toggleTheme = () => ({
 
 const setLightTheme = () => ({
 	type: LIGHT_THEME,
-	payload: {
-		theme: 'light',
-	},
 });
 
 const setDarkTheme = () => ({
 	type: DARK_THEME,
-	payload: {
-		theme: 'dark',
-	},
 });
 
 export { toggleTheme, setLightTheme, setDarkTheme };

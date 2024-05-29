@@ -11,8 +11,13 @@ const themeReducer = (state = initialState, action) => {
 				theme: state.theme === 'light' ? 'dark' : 'light',
 			};
 		case LIGHT_THEME:
+			return {
+				theme: 'light',
+			};
 		case DARK_THEME:
-			return action.payload;
+			return {
+				theme: 'dark',
+			};
 
 		default:
 			return state;
