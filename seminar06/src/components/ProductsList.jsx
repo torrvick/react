@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import Table from '@mui/joy/Table';
-import Sheet from '@mui/joy/Sheet';
 import Button from '@mui/joy/Button';
 import IconButton from '@mui/joy/IconButton';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -9,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
 import ProductDialog from './ProductDialog';
-import { toggleDialog } from '../store/appSlice';
+import { openAddDialog, openEditDialog } from '../store/appSlice';
 import { removeProduct } from '../store/productsSlice';
 
 function ProductsList() {
@@ -67,6 +65,7 @@ function ProductsList() {
 							</td>
 							<td>
 								<IconButton
+									onClick={() => dispatch(openEditDialog(product))}
 									sx={{
 										'--IconButton-size': '30px',
 									}}
@@ -90,7 +89,7 @@ function ProductsList() {
 			<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
 				<Button
 					onClick={() => {
-						dispatch(toggleDialog());
+						dispatch(openAddDialog());
 					}}
 				>
 					Новый товар

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/joy/Button';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
@@ -6,23 +6,30 @@ import Input from '@mui/joy/Input';
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import DialogTitle from '@mui/joy/DialogTitle';
-import DialogContent from '@mui/joy/DialogContent';
 import Stack from '@mui/joy/Stack';
 import Checkbox from '@mui/joy/Checkbox';
 import Textarea from '@mui/joy/Textarea';
-import Add from '@mui/icons-material/Add';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleDialog } from '../store/appSlice';
-import { addProduct } from '../store/productsSlice';
+import { closeDialog } from '../store/appSlice';
+import { addProduct, updateProduct } from '../store/productsSlice';
 
 function ProductDialog() {
-	const isDialogOpen = useSelector((state) => state.appState.dialogOpen);
+	const { open, mode, data } = useSelector((state) => state.appState.dialog);
 	const dispatch = useDispatch();
 
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState('');
 	const [available, setAvailable] = useState(true);
+
+	useEffect(() => {
+		if (mode === 'edit') {
+			setName(data.name);
+			setDescription(data.description);
+			setPrice(data.price);
+			setAvailable(data.available);
+		}
+	}, [mode, data]);
 
 	const clearForm = () => {
 		setName('');
@@ -31,21 +38,31 @@ function ProductDialog() {
 		setAvailable(true);
 	};
 
+	const handleSubmit = () => {
+		const product = { name, description, price, available };
+		if (mode === 'add') {
+			dispatch(addProduct(product));
+		} else if (mode === 'edit') {
+			dispatch(updateProduct({ id: data.id, ...product }));
+		}
+	};
+
 	return (
 		<Modal
-			open={isDialogOpen}
+			open={open}
 			onClose={() => {
-				dispatch(toggleDialog());
+				dispatch(closeDialog());
 				clearForm();
 			}}
 		>
 			<ModalDialog sx={{ width: '50vw' }}>
-				<DialogTitle>Новый товар</DialogTitle>
+				<DialogTitle>{mode === 'add' ? 'Новый товар' : 'Изменение товара'}</DialogTitle>
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
-						dispatch(addProduct({ name, description, price, available }));
+						handleSubmit();
 						clearForm();
+						dispatch(closeDialog());
 					}}
 				>
 					<Stack spacing={2}>
@@ -98,7 +115,7 @@ function ProductDialog() {
 								label="Наличие"
 							/>
 						</FormControl>
-						<Button type="submit">Submit</Button>
+						<Button type="submit">Сохранить</Button>
 					</Stack>
 				</form>
 			</ModalDialog>
