@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "content": "Выучить HTML",
+        "completed": true
+    },
+    {
+        "id": 2,
+        "content": "Выучить CSS",
+        "completed": true
+    },
+    {
+        "id": 3,
+        "content": "Выучить node.js",
+        "completed": false
+    },
+    {
+        "id": 4,
+        "content": "Выучить React",
+        "completed": false
+    }
+]
