@@ -1,0 +1,11 @@
+.App {
+  padding: 20px;
+}
+
+.App>ul {
+  padding-left: 20px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
